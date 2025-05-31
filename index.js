@@ -30,10 +30,10 @@ app.get("/api/viva-feed", async (req, res) => {
     console.log("Viva Engage feed retrieved successfully");
     res.status(200).json(feedResponse.data);
   } catch (error) {
-    console.error("Error fetching Viva Engage feed:", error.message);
-    res.status(500).json({
+    console.error("Full error:", error.response?.data || error.message);
+    return res.status(500).json({
       error: "Failed to fetch Viva Engage feed",
-      details: error.message,
+      details: error.response?.data || error.message,
     });
   }
 });
